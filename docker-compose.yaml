@@ -1,0 +1,23 @@
+# docker compose up -d --build --force-recreate
+version: '3.8'
+name: teste
+
+services:
+  db:
+    container_name: teste-db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=teste
+      - POSTGRES_PASSWORD=teste
+      - POSTGRES_DB=teste
+    volumes:
+      - $VOLUME/postgres/teste/data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - espm
+
+networks:
+  espm:
+    driver: bridge
